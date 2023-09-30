@@ -12,21 +12,11 @@ type BuyTransaction struct {
 	reserveNo string
 }
 
-func NewBuyTransaction() *BuyTransaction {
-	return &BuyTransaction{}
-}
-
-func (tx *BuyTransaction) GetAmount() uint64 {
-	return tx.amount
-}
-
-func (tx *BuyTransaction) SetAmount(price uint64) *BuyTransaction {
-	tx.amount = price
-	return tx
-}
-
-func (tx *BuyTransaction) GetEmail() string {
-	return tx.email
+func NewBuyTransaction(reserveNo string, amount uint64) *BuyTransaction {
+	return &BuyTransaction{
+		amount:    amount,
+		reserveNo: reserveNo,
+	}
 }
 
 func (tx *BuyTransaction) SetEmail(email string) *BuyTransaction {
@@ -34,21 +24,8 @@ func (tx *BuyTransaction) SetEmail(email string) *BuyTransaction {
 	return tx
 }
 
-func (tx *BuyTransaction) GetMobile() string {
-	return tx.mobile
-}
-
 func (tx *BuyTransaction) SetMobile(mobile string) *BuyTransaction {
 	tx.mobile = mobile
-	return tx
-}
-
-func (tx *BuyTransaction) GetReserveNo() string {
-	return tx.reserveNo
-}
-
-func (tx *BuyTransaction) SetReserveNo(reserveNo string) *BuyTransaction {
-	tx.reserveNo = reserveNo
 	return tx
 }
 

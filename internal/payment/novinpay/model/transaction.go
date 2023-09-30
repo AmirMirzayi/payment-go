@@ -1,7 +1,7 @@
 package model
 
 import (
-	"strconv"
+	"os"
 
 	"github.com/AmirMirzayi/payment-go/internal/payment/novinpay/global"
 )
@@ -13,7 +13,7 @@ type (
 		ReserveNum             string           `json:"ReserveNum"`
 		MerchantId             string           `json:"MerchantId"`
 		TerminalId             string           `json:"TerminalId"`
-		Amount                 string           `json:"Amount"`
+		Amount                 uint64           `json:"Amount"`
 		ProductId              string           `json:"ProductId"`
 		GoodsReferenceID       string           `json:"GoodsReferenceID"`
 		MerchatGoodReferenceID string           `json:"MerchatGoodReferenceID"`
@@ -29,15 +29,15 @@ type (
 	}
 )
 
-func GetGenerateTransactionRequestBody(amount uint64) GenerateTransactionRequest {
+func GetGenerateTransactionRequestBody(amount uint64, orderId string) GenerateTransactionRequest {
 
 	return GenerateTransactionRequest{
 		WsContext:              global.GetWsContext(),
 		TransType:              "EN_GOODS",
-		ReserveNum:             "123456",
-		MerchantId:             "01306251",
-		TerminalId:             "",
-		Amount:                 strconv.FormatUint(amount, 10),
+		ReserveNum:             orderId,
+		MerchantId:             os.Getenv("NOVIN_PAY_MERCHANT_ID"),
+		TerminalId:             os.Getenv("NOVIN_PAY_TERMINAL_ID"),
+		Amount:                 amount,
 		ProductId:              "",
 		GoodsReferenceID:       "987654",
 		MerchatGoodReferenceID: "111",

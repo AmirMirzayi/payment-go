@@ -16,7 +16,7 @@ func generateTransactionDataToSign(tx *BuyTransaction) (model.GenerateTransactio
 	txResult, err := helper.NewPostRequestWithContext[model.GenerateTransactionResponse](
 		ctx,
 		global.GenerateTransactionDataToSign,
-		model.GetGenerateTransactionRequestBody(tx.GetAmount()),
+		model.GetGenerateTransactionRequestBody(tx.amount, tx.reserveNo),
 	)
 	if err != nil {
 		return txResult, err
