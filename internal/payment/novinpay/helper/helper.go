@@ -61,15 +61,6 @@ func NewPostRequestWithContext[T model.Response](
 		return response, fmt.Errorf("خطا در برقراری ارتباط با پذیرنده درگاه پرداخت.")
 	}
 
-	// if data, ok := responseBody.(map[string]any); ok {
-	// 	if result, ok := data["Result"].(string); ok {
-	// 		if !IsSuccessful(result) {
-	// 			return nil, fmt.Errorf("خطا در سرویس درگاه پرداخت: %s", GetResponseText(result))
-	// 		}
-	// 		return nil, nil
-	// 	}
-	// }
-
 	if !IsSuccessful(response.GetResult()) {
 		return response, fmt.Errorf("خطا در سرویس درگاه پرداخت: %s", GetResponseText(response.GetResult()))
 	}

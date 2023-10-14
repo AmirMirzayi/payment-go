@@ -2,7 +2,6 @@ package novinpay
 
 import (
 	"context"
-	"time"
 
 	"github.com/AmirMirzayi/payment-go/internal/payment/novinpay/global"
 	"github.com/AmirMirzayi/payment-go/internal/payment/novinpay/helper"
@@ -10,7 +9,7 @@ import (
 )
 
 func login() (string, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), global.WaitingForResponseTime)
 	defer cancel()
 
 	txResult, err := helper.NewPostRequestWithContext[model.LoginResponse](

@@ -6,16 +6,18 @@ import (
 )
 
 type BuyTransaction struct {
+	id        string
 	amount    uint64
 	email     string
 	mobile    string
 	reserveNo string
 }
 
-func NewBuyTransaction(reserveNo string, amount uint64) *BuyTransaction {
+func NewBuyTransaction(id, orderId string, amount uint64) *BuyTransaction {
 	return &BuyTransaction{
+		id:        id,
 		amount:    amount,
-		reserveNo: reserveNo,
+		reserveNo: orderId,
 	}
 }
 

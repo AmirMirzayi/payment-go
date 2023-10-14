@@ -8,18 +8,18 @@ import (
 	"github.com/AmirMirzayi/payment-go/internal/payment/novinpay/model"
 )
 
-func generateTransactionDataToSign(tx *BuyTransaction) (model.GenerateTransactionResponse, error) {
+func VerifyTransaction(token, refNum string) (string, uint64, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), global.WaitingForResponseTime)
 	defer cancel()
 
-	txResult, err := helper.NewPostRequestWithContext[model.GenerateTransactionResponse](
+	txResult, err := helper.NewPostRequestWithContext[model.VerifyResponse](
 		ctx,
-		global.GenerateTransactionDataToSign,
-		model.GetGenerateTransactionRequestBody(tx.amount, tx.id, tx.reserveNo, tx.mobile, tx.email),
+		global.VerifyTransaction,
+		model.GetVerifyTransactionRequestBody(token, refNum),
 	)
 	if err != nil {
-		return txResult, err
+		return "", 0, err
 	}
 
-	return txResult, nil
+	return txResult.RefNum, txResult.Amount, nil
 }

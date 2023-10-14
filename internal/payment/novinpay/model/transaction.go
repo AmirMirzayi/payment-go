@@ -29,8 +29,7 @@ type (
 	}
 )
 
-func GetGenerateTransactionRequestBody(amount uint64, orderId string) GenerateTransactionRequest {
-
+func GetGenerateTransactionRequestBody(amount uint64, txId, orderId, mobile, email string) GenerateTransactionRequest {
 	return GenerateTransactionRequest{
 		WsContext:              global.GetWsContext(),
 		TransType:              "EN_GOODS",
@@ -38,12 +37,12 @@ func GetGenerateTransactionRequestBody(amount uint64, orderId string) GenerateTr
 		MerchantId:             os.Getenv("NOVIN_PAY_MERCHANT_ID"),
 		TerminalId:             os.Getenv("NOVIN_PAY_TERMINAL_ID"),
 		Amount:                 amount,
-		ProductId:              "",
-		GoodsReferenceID:       "987654",
-		MerchatGoodReferenceID: "111",
-		MobileNo:               "09127125699",
-		Email:                  "faraji80@yahoo.com",
-		RedirectUrl:            global.PaymentCallback,
+		ProductId:              orderId,
+		GoodsReferenceID:       txId,
+		MerchatGoodReferenceID: txId,
+		MobileNo:               mobile,
+		Email:                  email,
+		RedirectUrl:            global.PaymentCallbackURL,
 	}
 }
 

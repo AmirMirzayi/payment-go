@@ -1,5 +1,9 @@
 package global
 
+import "time"
+
+const WaitingForResponseTime time.Duration = 5 * time.Second
+
 type Code uint8
 
 const (
@@ -9,10 +13,15 @@ const (
 	InvalidData
 )
 
+const (
+	PaidStatus      string = "OK"
+	CancelledStatus string = "Canceled By User"
+)
+
 type PaymentURI string
 
 const (
-	PaymentCallback string = "https://dizintork.ir:4499/TestPayment/"
+	PaymentCallbackURL string = "https://dizintork.ir:4499/TestPayment/"
 
 	PaymentURL string = "https://pna.shaparak.ir/_ipgw_/payment/"
 
@@ -20,6 +29,7 @@ const (
 	LoginURI                      PaymentURI = baseURI + "/merchantLogin/"
 	GenerateTransactionDataToSign PaymentURI = baseURI + "/generateTransactionDataToSign/"
 	GenerateSignedDataToken       PaymentURI = baseURI + "/generateSignedDataToken/"
+	VerifyTransaction             PaymentURI = baseURI + "/verifyMerchantTrans/"
 )
 
 type WsContext struct {
